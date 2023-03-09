@@ -124,3 +124,42 @@ Note: Hoisting is a behavior that can sometimes cause unexpected results in your
 
 
 clousure
+In JavaScript, a closure is a function that has access to variables in its outer (enclosing) lexical scope, even after the outer function has returned. This means that a closure can "remember" and access the values of variables that were in scope when the closure was created.
+
+Here's an example of a closure using the let keyword:
+function createCounter() {
+  let count = 0;
+  return function() {
+    count++;
+    console.log(count);
+  }
+}
+
+const counter = createCounter();
+counter(); // Output: 1
+counter(); // Output: 2
+
+
+
+In this example, the createCounter function returns another function that has access to the count variable in its outer scope. Each time the returned function is called, it increments the count variable and logs the new value to the console. Because the count variable is declared using let, it is block-scoped to the createCounter function and is not accessible outside of it. However, the closure created by the returned function retains access to count.
+
+Here's an example using the var keyword:
+function createGreeter(name) {
+  var greeting = "Hello";
+  return function() {
+    console.log(greeting + ", " + name);
+  }
+}
+
+const greetJohn = createGreeter("John");
+greetJohn(); // Output: "Hello, John"
+
+const greetJane = createGreeter("Jane");
+greetJane(); // Output: "Hello, Jane"
+
+
+
+In this example, the createGreeter function returns another function that has access to the greeting and name variables in its outer scope. The greeting variable is declared using var, which means that it is function-scoped and is accessible outside of the createGreeter function. However, because each closure created by the returned function has its own lexical environment, the value of greeting and name are separate for each closure.
+
+
+
